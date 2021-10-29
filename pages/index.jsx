@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1>iRepeat</h1>
+        <p>Work in progress...</p>
       </div>
     </>
   );
