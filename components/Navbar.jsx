@@ -8,17 +8,17 @@ export const Navbar = () => {
         <ul>
           <li>
             <Link href="/">
-              <p>Main</p>
+              <a>Main</a>
             </Link>
           </li>
           <li>
             <Link href="/createCard">
-              <p>Add Cards</p>
+              <a>Add Cards</a>
             </Link>
           </li>
           <li>
             <Link href="/categories">
-              <p>Categories</p>
+              <a>Categories</a>
             </Link>
           </li>
         </ul>
