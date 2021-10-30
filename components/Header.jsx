@@ -7,10 +7,10 @@ export const Header = ({ pageTitle }) => {
 ///STYLES///
 
 const StyledHeader = styled.h1`
-  left: 0;
   margin: 0;
-  padding: 0;
+  padding: 0.8rem;
   width: 100vw;
   text-align: center;
   border-bottom: 1px solid black;
+  z-index: 1;
 `;

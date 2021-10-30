@@ -1,20 +1,32 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+:root {
+--main-color: #70abaf;
+
+
+}
+
 html,
 body {
+  user-select: none;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 & main{
   margin-top: 5rem;
+  
 }
 }
 
 a {
   
   text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
 
 * {
