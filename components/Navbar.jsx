@@ -33,15 +33,16 @@ export const Navbar = () => {
 /// STYLES ///
 
 const StyledNavContainer = styled.div`
+  top: 185vw;
   width: 100vw;
   display: flex;
   justify-content: center;
   position: fixed;
   z-index: 1;
   cursor: pointer;
-  top: 185vw;
 
   & ul {
+    background-color: white;
     padding: 0;
     display: flex;
     flex-direction: row;
