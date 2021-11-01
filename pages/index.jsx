@@ -1,14 +1,23 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import styled from "styled-components";
+import { Navbar } from "../components/Navbar";
+import { Header } from "../components/Header";
 
 export default function Home() {
   return (
     <>
-      <div>
-        <h1>iRepeat</h1>
-      </div>
+      <StyledMainHeader>
+        <Header pageTitle="iRepeat" />
+      </StyledMainHeader>
+      <main>
+        <p>Work in progress...</p>
+      </main>
+      <Navbar />
     </>
   );
 }
+const StyledMainHeader = styled.div`
+  &::first-letter {
+    color: var(--main-color);
+    z-index: 1;
+  }
+`;
