@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Header = ({ pageTitle }) => {
-  return <StyledHeader>{pageTitle}</StyledHeader>;
+export const Header = ({ pageTitle, isMainTitle }) => {
+  return <StyledHeader isMainTitle={isMainTitle}>{pageTitle}</StyledHeader>;
 };
 
 ///STYLES///
@@ -16,8 +16,8 @@ const StyledHeader = styled.h1`
   position: fixed;
   z-index: 1;
   background-color: white;
-  /* & ::first-letter {
-    color: var(--main-color);
+  &::first-letter {
+    color: ${(props) => (props.isMainTitle ? "var(--main-color)" : undefined)};
     z-index: 1;
-  } */
+  }
 `;

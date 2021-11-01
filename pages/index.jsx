@@ -7,9 +7,8 @@ import { vocabularies } from "../components/Vocabularies";
 export default function Home() {
   return (
     <>
-      <StyledMainHeader>
-        <Header pageTitle="iRepeat" />
-      </StyledMainHeader>
+      <Header pageTitle="iRepeat" isMainTitle />
+
       <main>
         {vocabularies.map(
           ({ id, article, word, wordType, ipa, category, rating }) => (
@@ -31,10 +30,3 @@ export default function Home() {
 }
 
 /// Styles ///
-
-const StyledMainHeader = styled.div`
-  & ::first-letter {
-    color: var(--main-color);
-    z-index: 1;
-  }
-`;

@@ -1,4 +1,4 @@
-const browsByCategory = () => {
+const BrowsByCategory = () => {
   return (
     <>
       <section>
