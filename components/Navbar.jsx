@@ -1,47 +1,43 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Image from "next/image";
 
 export const Navbar = () => {
   return (
-    <>
-      <nav>
-        <StyledNavContainer>
-          <ul>
-            <li>
-              <Link href="/">
-                <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
-              </Link>
-            </li>
-            <li>
-              <Link href="/createCard">
-                <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
-              </Link>
-            </li>
-            <li>
-              <Link href="/categories">
-                <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
-              </Link>
-            </li>
-          </ul>
-        </StyledNavContainer>
-      </nav>
-    </>
+    <StyledNavContainer>
+      <ul>
+        <li>
+          <Link href="/">
+            <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
+          </Link>
+        </li>
+        <li>
+          <Link href="/CreateCard">
+            <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
+          </Link>
+        </li>
+        <li>
+          <Link href="/Categories">
+            <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
+          </Link>
+        </li>
+      </ul>
+    </StyledNavContainer>
   );
 };
 
 /// STYLES ///
 
 const StyledNavContainer = styled.div`
+  top: 185vw;
   width: 100vw;
   display: flex;
   justify-content: center;
   position: fixed;
   z-index: 1;
   cursor: pointer;
-  top: 185vw;
 
   & ul {
+    background-color: white;
     padding: 0;
     display: flex;
     flex-direction: row;

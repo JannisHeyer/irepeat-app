@@ -1,15 +1,15 @@
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 
-const CreateCard = () => {
+const Categories = () => {
   return (
     <>
-      <Header pageTitle="Add a card" />
+      <Header pageTitle="Categories" />
       <section>
-        <p>Add a card</p>
+        <p>Categories</p>
       </section>
       <Navbar />
     </>
   );
 };
-export default CreateCard;
+export default Categories;
