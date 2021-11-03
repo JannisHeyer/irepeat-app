@@ -22,7 +22,7 @@ export const Navbar = () => {
         <li>
           <Link href="/categories">
             <a>
-              {" "}
+             
               <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
             </a>
           </Link>
