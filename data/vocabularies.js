@@ -1,8 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-
 export const vocabularies = [
   {
-    id: uuidv4(),
     word: "Currywurst",
     article: "Die",
     wordType: "Noun",
@@ -12,7 +9,6 @@ export const vocabularies = [
     translation: "Currywurst or Curry sausage",
   },
   {
-    id: uuidv4(),
     word: "Apfel",
     article: "Der",
     wordType: "Noun",
@@ -22,7 +18,6 @@ export const vocabularies = [
     translation: "Apple",
   },
   {
-    id: uuidv4(),
     word: "Brot",
     article: "Das",
     wordType: "Noun",
@@ -32,7 +27,6 @@ export const vocabularies = [
     translation: "Bread",
   },
   {
-    id: uuidv4(),
     word: "Teller",
     article: "Der",
     wordType: "Noun",
@@ -42,7 +36,6 @@ export const vocabularies = [
     translation: "Plate",
   },
   {
-    id: uuidv4(),
     word: "Essen",
     article: "Das",
     wordType: "Noun",
@@ -52,7 +45,6 @@ export const vocabularies = [
     translation: "Food",
   },
   {
-    id: uuidv4(),
     word: "Küchenutensil",
     article: "Das",
     wordType: "Noun",
@@ -62,7 +54,6 @@ export const vocabularies = [
     translation: "kitchen utensil",
   },
   {
-    id: uuidv4(),
     word: "Wunderbar",
     article: "",
     wordType: "Adjective",
@@ -72,7 +63,6 @@ export const vocabularies = [
     translation: "Marvelous",
   },
   {
-    id: uuidv4(),
     word: "Ängstlich",
     article: "",
     wordType: "Adjective",
@@ -82,7 +72,6 @@ export const vocabularies = [
     translation: "",
   },
   {
-    id: uuidv4(),
     word: "Ängstlich",
     article: "",
     wordType: "Adjective",
@@ -93,7 +82,6 @@ export const vocabularies = [
   },
 
   {
-    id: uuidv4(),
     word: "Chronisch",
     article: "",
     wordType: "Adjective",
@@ -104,7 +92,6 @@ export const vocabularies = [
   },
 
   {
-    id: uuidv4(),
     word: "Ausgefuchst",
     article: "",
     wordType: "Adjective",
@@ -114,7 +101,6 @@ export const vocabularies = [
     translation: "Clever",
   },
   {
-    id: uuidv4(),
     word: "Bus",
     article: "Der",
     wordType: "Noun",
@@ -124,7 +110,6 @@ export const vocabularies = [
     translation: "Bus",
   },
   {
-    id: uuidv4(),
     word: "Bushaltestelle",
     article: "Die",
     wordType: "Noun",
@@ -134,7 +119,6 @@ export const vocabularies = [
     translation: "Bus stop",
   },
   {
-    id: uuidv4(),
     word: "Fliegen",
     article: "Das",
     wordType: "Substantiv",
@@ -144,7 +128,6 @@ export const vocabularies = [
     translation: "Flying",
   },
   {
-    id: uuidv4(),
     word: "bogenschießen",
     article: "",
     wordType: "Substantiv",
@@ -154,7 +137,6 @@ export const vocabularies = [
     translation: "Archery",
   },
   {
-    id: uuidv4(),
     word: "programmieren",
     article: "",
     wordType: "Verb",
@@ -164,7 +146,6 @@ export const vocabularies = [
     translation: "To Program",
   },
   {
-    id: uuidv4(),
     word: "Henne",
     article: "Die",
     wordType: "Noun",
@@ -174,14 +155,31 @@ export const vocabularies = [
     translation: "Hen",
   },
   {
-    id: uuidv4(),
     word: "merkwürdig",
     article: "",
     wordType: "Adjektiv",
-    ipa: "ˈmɛʁkˌvʏʁdɪç]",
+    ipa: "ˈmɛʁkˌvʏʁdɪç",
     category: "Adjektive",
     rating: 30,
-    translation: "Remarkable",
+    translation: "Remarkable or Weird",
+  },
+  {
+    word: "Kartoffel",
+    article: "Die",
+    wordType: "Noun",
+    ipa: "kɑˈtɔfəl",
+    category: "Food",
+    rating: 10,
+    translation: "Potato",
+  },
+  {
+    word: "Hüftgold",
+    article: "Das",
+    wordType: "Noun",
+    ipa: "hʏftˌɡɔlt",
+    category: "Food",
+    rating: 30,
+    translation: "Love handles",
   },
 ];
 export default vocabularies;

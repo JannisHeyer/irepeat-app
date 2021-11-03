@@ -7,17 +7,24 @@ export const Navbar = () => {
       <ul>
         <li>
           <Link href="/">
-            <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
+            <a>
+              <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
+            </a>
           </Link>
         </li>
         <li>
-          <Link href="/CreateCard">
-            <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
+          <Link href="/createCard">
+            <a>
+              <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
+            </a>
           </Link>
         </li>
         <li>
-          <Link href="/Categories">
-            <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
+          <Link href="/categories">
+            <a>
+             
+              <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
+            </a>
           </Link>
         </li>
       </ul>
