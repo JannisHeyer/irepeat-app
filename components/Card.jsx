@@ -24,7 +24,7 @@ export const Card = ({
         variants={variants}
       >
         {!isFlipped ? (
-          <StyledCardContainerFront>
+          <StyledCardContainer>
             <h2>{article}</h2>
             <h1>{word}</h1>
             <p>{wordType}</p>
@@ -39,20 +39,19 @@ export const Card = ({
             >
               Translation
             </StyledButton>
-          </StyledCardContainerFront>
+          </StyledCardContainer>
         ) : (
-          <StyledCardContainerBack className="cardBack">
+          <StyledCardContainer className="cardBack">
             <h2>Translation:</h2>
             <h3>{translation}</h3>
+            <StyledButton>Got it!</StyledButton>{" "}
+            <StyledButton>Repeat!</StyledButton>
             <StyledButton
-              className="buttonBack"
               onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
             >
               Back!
             </StyledButton>
-            <StyledButton className="buttonBack">Got it!</StyledButton>{" "}
-            <StyledButton className="buttonBack">Repeat!</StyledButton>
-          </StyledCardContainerBack>
+          </StyledCardContainer>
         )}
       </StyledMotionDiv>
     </>
@@ -60,53 +59,45 @@ export const Card = ({
 };
 
 export default Card;
+
 const StyledMotionDiv = styled(motion.div)`
+  width: var(--card-width);
+  height: var(--card-height);
+  margin: var(--card-margin);
   background-color: transparent;
-  //position: relative;
-  width: 279px;
-  height: 455.13px;
-  margin: 5rem 3rem 0rem 3rem;
+  position: relative;
   perspective: 1000px;
 `;
 
-const StyledCardContainerFront = styled.div`
+const StyledCardContainer = styled.div`
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   text-align: center;
-  border: 1px solid var(--main-color);
-  transition: transform 0.8s;
   transform-style: preserve-3d;
+  background-color: var(--card-bgColor);
+  border: var(--card-border);
+
   & li {
     float: left;
   }
-`;
 
-const StyledCardContainerBack = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  border: 1px solid var(--main-color);
-  transform: rotateY(180deg);
+  &.cardBack {
+    transform: rotateY(180deg);
+    & h2 {
+      margin-bottom: 3rem;
+    }
+    & h3 {
+      margin-bottom: 11.97rem;
+    }
+  }
 `;
 
 const StyledButton = styled.button`
   color: white;
   border: none;
+  margin-bottom: 2rem;
   background-color: var(--main-color);
   height: var(--button-height);
   width: var(--button-width);
   border-radius: var(--button-border-radius);
-  margin-bottom: 2rem;
 `;

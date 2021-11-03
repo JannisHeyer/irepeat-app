@@ -6,6 +6,11 @@ const GlobalStyles = createGlobalStyle`
 --button-border-radius: 0.3rem;
 --button-height: 2.5rem;
 --button-width: 6.5rem;
+--card-height: 455.13px;
+--card-width: 279px;
+--card-margin: 5rem 3rem 0rem 3rem;
+--card-border: 1px solid #70abaf;
+--card-bgColor: white;
 }
 
 html,
