@@ -1,7 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import Card from "../components/Card";
-import { vocabularies } from "./vocabularies";
+import { vocabularies } from "../data/vocabularies";
 
 export default function Home() {
   return (
