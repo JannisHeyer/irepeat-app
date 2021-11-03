@@ -1,3 +1,3 @@
 const Rating = () => {
-  return <></>;
+  return null;
 };

@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 :root {
---main-color:#70abaf;
+--main-color: #70abaf;
 --button-border-radius: 0.3rem;
 --button-height: 2.5rem;
 --button-width: 6.5rem;

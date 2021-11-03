@@ -1,8 +1,7 @@
-import styled from "styled-components";
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import Card from "../components/Card";
-import { vocabularies } from "../components/vocabularies";
+import { vocabularies } from "./vocabularies";
 
 export default function Home() {
   return (
@@ -11,15 +10,16 @@ export default function Home() {
 
       <main>
         {vocabularies.map(
-          ({ id, article, word, wordType, ipa, category, rating }) => (
+          ({ article, word, wordType, ipa, category, rating, translation }) => (
             <Card
-              key={id}
+              key={word}
               word={word}
               article={article}
               wordType={wordType}
               ipa={ipa}
               category={category}
               rating={rating}
+              translation={translation}
             />
           )
         )}

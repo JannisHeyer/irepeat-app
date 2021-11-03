@@ -11,12 +11,12 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/CreateCard">
+          <Link href="/components/CreateCard">
             <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
           </Link>
         </li>
         <li>
-          <Link href="/Categories">
+          <Link href="/components/Categories">
             <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
           </Link>
         </li>
