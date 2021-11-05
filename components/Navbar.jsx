@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Navbar = () => {
   return (
@@ -7,24 +8,33 @@ export const Navbar = () => {
       <ul>
         <li>
           <Link href="/">
-            <a>
-              <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
-            </a>
+            <Image
+              className="navIcons"
+              src="/Icons/AddCard-Black.svg"
+              width={60}
+              height={60}
+              alt="Home icon liking to the main page"
+            />
           </Link>
         </li>
         <li>
           <Link href="/createCard">
-            <a>
-              <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
-            </a>
+            <Image
+              src="/Icons/AddCard-Black.svg"
+              width={60}
+              height={60}
+              alt="Icon linking to the create a card section"
+            />
           </Link>
         </li>
         <li>
           <Link href="/categories">
-            <a>
-              {" "}
-              <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
-            </a>
+            <Image
+              src="/Icons/Categories-Black.svg"
+              width={60}
+              height={60}
+              alt="Icon that links to the category section"
+            />
           </Link>
         </li>
       </ul>
@@ -57,9 +67,7 @@ const StyledNavContainer = styled.div`
       display: flex;
       justify-content: space-around;
     }
-    & img {
-      height: 4rem;
-      width: 4rem;
+    & Image {
       margin: 0.5rem 1rem 0.5rem 1rem;
     }
   }

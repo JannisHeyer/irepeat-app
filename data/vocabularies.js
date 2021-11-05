@@ -7,6 +7,7 @@ export const vocabularies = [
     category: "food",
     rating: 10,
     translation: "Currywurst or Curry sausage",
+    active: true,
   },
   {
     word: "Apfel",
@@ -16,6 +17,7 @@ export const vocabularies = [
     category: "food",
     rating: 10,
     translation: "Apple",
+    active: true,
   },
   {
     word: "Brot",
@@ -25,6 +27,7 @@ export const vocabularies = [
     category: "food",
     rating: 10,
     translation: "Bread",
+    active: true,
   },
   {
     word: "Teller",
@@ -34,6 +37,7 @@ export const vocabularies = [
     category: "food",
     rating: 10,
     translation: "Plate",
+    active: true,
   },
   {
     word: "Essen",
@@ -43,6 +47,7 @@ export const vocabularies = [
     category: "food",
     rating: 10,
     translation: "Food",
+    active: true,
   },
   {
     word: "Küchenutensil",
@@ -52,6 +57,7 @@ export const vocabularies = [
     category: "food",
     rating: 30,
     translation: "kitchen utensil",
+    active: true,
   },
   {
     word: "Wunderbar",
@@ -61,16 +67,9 @@ export const vocabularies = [
     category: "Adjective",
     rating: 20,
     translation: "Marvelous",
+    active: true,
   },
-  {
-    word: "Ängstlich",
-    article: "",
-    wordType: "Adjective",
-    ipa: "ˈɛŋstlɪç",
-    category: "Adjective",
-    rating: 20,
-    translation: "",
-  },
+
   {
     word: "Ängstlich",
     article: "",
@@ -79,6 +78,7 @@ export const vocabularies = [
     category: "Adjective",
     rating: 20,
     translation: "Scared",
+    active: true,
   },
 
   {
@@ -89,6 +89,7 @@ export const vocabularies = [
     category: "Adjective",
     rating: 20,
     translation: "Chronicly",
+    active: true,
   },
 
   {
@@ -99,6 +100,7 @@ export const vocabularies = [
     category: "Adjective",
     rating: 30,
     translation: "Clever",
+    active: true,
   },
   {
     word: "Bus",
@@ -108,6 +110,7 @@ export const vocabularies = [
     category: "Transportation",
     rating: 10,
     translation: "Bus",
+    active: true,
   },
   {
     word: "Bushaltestelle",
@@ -117,6 +120,7 @@ export const vocabularies = [
     category: "Transportation",
     rating: 30,
     translation: "Bus stop",
+    active: true,
   },
   {
     word: "Fliegen",
@@ -126,6 +130,7 @@ export const vocabularies = [
     category: "Transportation",
     rating: 20,
     translation: "Flying",
+    active: true,
   },
   {
     word: "bogenschießen",
@@ -135,6 +140,7 @@ export const vocabularies = [
     category: "Sport",
     rating: 30,
     translation: "Archery",
+    active: true,
   },
   {
     word: "programmieren",
@@ -144,6 +150,7 @@ export const vocabularies = [
     category: "Beruf",
     rating: 30,
     translation: "To Program",
+    active: true,
   },
   {
     word: "Henne",
@@ -153,6 +160,7 @@ export const vocabularies = [
     category: "Tier",
     rating: 10,
     translation: "Hen",
+    active: true,
   },
   {
     word: "merkwürdig",
@@ -162,6 +170,7 @@ export const vocabularies = [
     category: "Adjektive",
     rating: 30,
     translation: "Remarkable or Weird",
+    active: true,
   },
   {
     word: "Kartoffel",
@@ -171,6 +180,7 @@ export const vocabularies = [
     category: "Food",
     rating: 10,
     translation: "Potato",
+    active: true,
   },
   {
     word: "Hüftgold",
@@ -180,6 +190,8 @@ export const vocabularies = [
     category: "Food",
     rating: 30,
     translation: "Love handles",
+    active: true,
   },
 ];
+console.log(vocabularies.length);
 export default vocabularies;

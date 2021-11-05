@@ -2,10 +2,15 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 :root {
+  // Colors //
 --main-color: #70abaf;
+
+// Button-Styling //
 --button-border-radius: 0.3rem;
 --button-height: 2.5rem;
 --button-width: 6.5rem;
+
+// Card-Styling //
 --card-height: 455.13px;
 --card-width: 279px;
 --card-margin: 5rem 3rem 0rem 3rem;
