@@ -41,37 +41,25 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
       setDragStart({ axis: null, animation: { x: 0, y: 0 } });
       x.set(0);
       y.set(0);
-      //TODO: Instead of returning Brot when the end of the array has been reached (vocabularies.index === vocabularies.length -1 ) return the first entry again
-      setVocabularies([
-        {
-          word: "Brot",
-          article: "Das",
-          wordType: "Noun",
-          ipa: "ˈbʁoːt",
-          category: "food",
-          rating: 10,
-          translation: "Bread",
-          active: true,
-        },
-        ...vocabularies.slice(0, vocabularies.length - 1), // slice Card and push to new array - if array empty switch to new array?
-      ]);
+      // TODO: If offset.x >= 200 keep card in the rotation
+      //TODO: If offset.x >= -200 remove card from rotation and push it to inactiveCards=[]
+      const lastIndex = vocabularies.length - 1;
+      const lastElement = vocabularies[lastIndex];
+      const newVocabulary = [lastElement, ...vocabularies.slice(0, lastIndex)];
+      setVocabularies([...newVocabulary]);
     }, 200);
   };
-  // TODO: If offset.x >= 200 keep card in the rotation
+
   const onDragEnd = (info) => {
     if (dragStart.axis === "x") {
       if (info.offset.x >= 200) animateCardSwipe({ x: 275, y: 0 });
-      //TODO: If offset.x >= -200 remove card from rotation and push it to inactiveCards=[]
       else if (info.offset.x <= -200) animateCardSwipe({ x: -275, y: 0 });
     } /*else {
       if (info.offset.y >= 200) animateCardSwipe({ x: 0, y: 275 });
       else if (info.offset.y <= -200) animateCardSwipe({ x: 0, y: -275 });
     }*/
   };
-  // const onSwipeRight = (info) => {
-  // if (info.offset.x <= -275)
-  //
-  // }
+
   const renderCards = () => {
     return vocabularies.map(
       (
@@ -95,25 +83,24 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
               animate={dragStart.animation}
             />
           );
-        } else console.log(index);
-        console.log(vocabularies.length - 1);
-        return (
-          <Card
-            key={word}
-            word={word}
-            article={article}
-            wordType={wordType}
-            ipa={ipa}
-            category={category}
-            rating={rating}
-            translation={translation}
-            style={{
-              scale,
-              boxShadow,
-              zIndex: index,
-            }}
-          />
-        );
+        } else
+          return (
+            <Card
+              key={word}
+              word={word}
+              article={article}
+              wordType={wordType}
+              ipa={ipa}
+              category={category}
+              rating={rating}
+              translation={translation}
+              style={{
+                scale,
+                boxShadow,
+                zIndex: index,
+              }}
+            />
+          );
       }
     );
   };
