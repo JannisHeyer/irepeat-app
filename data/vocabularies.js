@@ -193,5 +193,5 @@ export const vocabularies = [
     active: true,
   },
 ];
-console.log(vocabularies.length);
+
 export default vocabularies;

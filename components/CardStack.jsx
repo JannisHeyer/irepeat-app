@@ -7,8 +7,6 @@ import {
 import React, { useState } from "react";
 import Card from "../components/Card";
 
-//TODO: Disable the ability to swipe up and down - Do not remove might be useful at a later stage.
-
 export const CardStack = ({ vocabularies: vocabulariesprop }) => {
   const [vocabularies, setVocabularies] = useState(vocabulariesprop);
   const [dragStart, setDragStart] = useState({
@@ -54,10 +52,10 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
     if (dragStart.axis === "x") {
       if (info.offset.x >= 200) animateCardSwipe({ x: 275, y: 0 });
       else if (info.offset.x <= -200) animateCardSwipe({ x: -275, y: 0 });
-    } /*else {
+    } else {
       if (info.offset.y >= 200) animateCardSwipe({ x: 0, y: 275 });
       else if (info.offset.y <= -200) animateCardSwipe({ x: 0, y: -275 });
-    }*/
+    }
   };
 
   const renderCards = () => {
