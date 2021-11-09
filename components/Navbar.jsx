@@ -50,8 +50,5 @@ const StyledNavContainer = styled.div`
       display: flex;
       justify-content: space-around;
     }
-    & Image {
-      margin: 0.5rem 1rem 0.5rem 1rem;
-    }
   }
 `;
