@@ -75,9 +75,8 @@ export const Card = ({
 
 export default Card;
 
-// FIXME: Visual bug that appears on cards without an article (Border smaller than card(?)).
-// FIXME: Visual bug that appears on cards WITH an article (article snapping in).
-// FIXME: Visual bug  Card changes size on flip.
+// FIXME: Boxshadow not showing on first card.
+// FIXME: Card changes size on flip(?).
 
 const StyledSwiper = styled(motion.div)`
   position: absolute;
@@ -98,6 +97,8 @@ const StyledFlipper = styled(motion.div)`
 `;
 
 const StyledCardContainer = styled.div`
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   text-align: center;

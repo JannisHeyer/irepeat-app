@@ -6,9 +6,11 @@ import {
 } from "framer-motion";
 import React, { useState } from "react";
 import Card from "../components/Card";
+import inactiveCards from "../data/inactiveCards";
 
 export const CardStack = ({ vocabularies: vocabulariesprop }) => {
   const [vocabularies, setVocabularies] = useState(vocabulariesprop);
+  const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
     animation: { x: 0, y: 0 },
@@ -39,12 +41,28 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
       setDragStart({ axis: null, animation: { x: 0, y: 0 } });
       x.set(0);
       y.set(0);
-      // TODO: If offset.x >= 200 keep card in the rotation
-      //TODO: If offset.x >= -200 remove card from rotation and push it to inactiveCards=[]
+      // Removes card if the user swipes left and keeps it if they swipe right //
       const lastIndex = vocabularies.length - 1;
       const lastElement = vocabularies[lastIndex];
-      const newVocabulary = [lastElement, ...vocabularies.slice(0, lastIndex)];
-      setVocabularies([...newVocabulary]);
+      function checkInactive(vocabularies) {
+        return vocabularies.active === false;
+      }
+      function checkActive(vocabularies) {
+        return vocabularies.active === true;
+      }
+      if (animation.x < 0) {
+        lastElement.active = false;
+        const allInactiveCards = vocabularies.filter(checkInactive);
+        const allActiveCards = vocabularies.filter(checkActive);
+        setVocabularies([...allActiveCards]);
+        setInactive([...inactive, ...allInactiveCards]);
+      } else {
+        const newVocabulary = [
+          lastElement,
+          ...vocabularies.slice(0, lastIndex),
+        ];
+        setVocabularies([...newVocabulary]);
+      }
     }, 200);
   };
 
@@ -61,12 +79,13 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
   const renderCards = () => {
     return vocabularies.map(
       (
-        { article, word, wordType, ipa, category, rating, translation },
+        { article, word, wordType, ipa, category, rating, translation, active },
         index
       ) => {
         if (index === vocabularies.length - 1) {
           return (
             <Card
+              active={active}
               key={word}
               word={word}
               article={article}
@@ -84,6 +103,7 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
         } else
           return (
             <Card
+              active={active}
               key={word}
               word={word}
               article={article}

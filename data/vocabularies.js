@@ -6,7 +6,7 @@ export const vocabularies = [
     ipa: "ˈkœʁiˌvʊʁst",
     category: "food",
     rating: 10,
-    translation: "Currywurst or Curry sausage",
+    translation: "Curry sausage",
     active: true,
   },
   {
@@ -61,7 +61,7 @@ export const vocabularies = [
   },
   {
     word: "Wunderbar",
-    article: "",
+    article: " ",
     wordType: "Adjective",
     ipa: "ˈvʊndɐˌbaːɐ̯",
     category: "Adjective",
@@ -72,7 +72,7 @@ export const vocabularies = [
 
   {
     word: "Ängstlich",
-    article: "",
+    article: " ",
     wordType: "Adjective",
     ipa: "ˈɛŋstlɪç",
     category: "Adjective",
@@ -83,7 +83,7 @@ export const vocabularies = [
 
   {
     word: "Chronisch",
-    article: "",
+    article: " ",
     wordType: "Adjective",
     ipa: "ˈkʁoːnɪʃ",
     category: "Adjective",
@@ -94,7 +94,7 @@ export const vocabularies = [
 
   {
     word: "Ausgefuchst",
-    article: "",
+    article: " ",
     wordType: "Adjective",
     ipa: "ˈaʊ̯sɡəˌfʊkst",
     category: "Adjective",
@@ -123,9 +123,9 @@ export const vocabularies = [
     active: true,
   },
   {
-    word: "Fliegen",
-    article: "Das",
-    wordType: "Substantiv",
+    word: "fliegen",
+    article: " ",
+    wordType: "Verb",
     ipa: "ˈfliːɡn̩",
     category: "Transportation",
     rating: 20,
@@ -134,7 +134,7 @@ export const vocabularies = [
   },
   {
     word: "bogenschießen",
-    article: "",
+    article: " ",
     wordType: "Substantiv",
     ipa: "ˈboːɡn̩ˌʃiːsn̩",
     category: "Sport",
@@ -144,7 +144,7 @@ export const vocabularies = [
   },
   {
     word: "programmieren",
-    article: "",
+    article: " ",
     wordType: "Verb",
     ipa: "pʁoɡʁaˈmiːʁən",
     category: "Beruf",
@@ -164,7 +164,7 @@ export const vocabularies = [
   },
   {
     word: "merkwürdig",
-    article: "",
+    article: " ",
     wordType: "Adjektiv",
     ipa: "ˈmɛʁkˌvʏʁdɪç",
     category: "Adjektive",

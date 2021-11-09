@@ -1,5 +1,3 @@
-// Will be used to store inactive cue cards until implementation of a database
-
 export const inactiveCards = [
   {
     word: "Glamourös",
