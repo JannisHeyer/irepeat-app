@@ -8,8 +8,8 @@ import React, { useState } from "react";
 import Card from "../components/Card";
 import inactiveCards from "../data/inactiveCards";
 
-export const CardStack = ({ vocabularies: vocabulariesprop }) => {
-  const [vocabularies, setVocabularies] = useState(vocabulariesprop);
+export const CardStack = ({ initialVocabularies }) => {
+  const [vocabularies, setVocabularies] = useState(initialVocabularies);
   const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
