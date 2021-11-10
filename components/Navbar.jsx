@@ -12,7 +12,7 @@ export const Navbar = () => {
         </li>
         <li>
           <Link href="/createCard">
-            <a> Add a Card</a>
+            <a>Add a Card</a>
           </Link>
         </li>
         <li>
