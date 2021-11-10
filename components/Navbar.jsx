@@ -17,7 +17,7 @@ export const Navbar = () => {
         </li>
         <li>
           <Link href="/categories">
-            <a> Categories </a>
+            <a>Categories</a>
           </Link>
         </li>
       </ul>
