@@ -7,24 +7,17 @@ export const Navbar = () => {
       <ul>
         <li>
           <Link href="/">
-            <a>
-              <img src="/Icons/MainCueCard-Black.svg" alt="Main Icon" />
-            </a>
+            <a>Home</a>
           </Link>
         </li>
         <li>
           <Link href="/createCard">
-            <a>
-              <img src="/Icons/AddCard-Black.svg" alt="Main Icon" />
-            </a>
+            <a>Add a Card</a>
           </Link>
         </li>
         <li>
           <Link href="/categories">
-            <a>
-             
-              <img src="/Icons/Categories-Black.svg" alt="Main Icon" />
-            </a>
+            <a>Categories</a>
           </Link>
         </li>
       </ul>
@@ -56,11 +49,6 @@ const StyledNavContainer = styled.div`
     & li {
       display: flex;
       justify-content: space-around;
-    }
-    & img {
-      height: 4rem;
-      width: 4rem;
-      margin: 0.5rem 1rem 0.5rem 1rem;
     }
   }
 `;
