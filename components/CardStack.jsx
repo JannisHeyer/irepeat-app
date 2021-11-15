@@ -7,9 +7,9 @@ import {
 import React, { useState } from "react";
 import Card from "../components/Card";
 import inactiveCards from "../data/inactiveCards";
+import EndCard from "../components/EndCard";
 
-export const CardStack = ({ vocabularies: vocabulariesprop }) => {
-  const [vocabularies, setVocabularies] = useState(vocabulariesprop);
+export const CardStack = ({ vocabularies, setVocabularies }) => {
   const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
@@ -41,27 +41,35 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
       setDragStart({ axis: null, animation: { x: 0, y: 0 } });
       x.set(0);
       y.set(0);
-      // Removes card if the user swipes left and keeps it if they swipe right //
+
       const lastIndex = vocabularies.length - 1;
       const lastElement = vocabularies[lastIndex];
+
+      const setCurrentCardInactive = () => {
+        lastElement.active = false;
+        const allInactiveCards = vocabularies.filter(checkInactive);
+        const allActiveCards = vocabularies.filter(checkActive);
+        setVocabularies([...allActiveCards]);
+        setInactive([...inactive, ...allInactiveCards]);
+      };
+      const moveCurrentCardtoButtom = () => {
+        const newVocabulary = [
+          lastElement,
+          ...vocabularies.slice(0, lastIndex),
+        ];
+        setVocabularies([...newVocabulary]);
+      };
       function checkInactive(vocabularies) {
         return vocabularies.active === false;
       }
       function checkActive(vocabularies) {
         return vocabularies.active === true;
       }
+
       if (animation.x < 0) {
-        lastElement.active = false;
-        const allInactiveCards = vocabularies.filter(checkInactive);
-        const allActiveCards = vocabularies.filter(checkActive);
-        setVocabularies([...allActiveCards]);
-        setInactive([...inactive, ...allInactiveCards]);
+        setCurrentCardInactive();
       } else {
-        const newVocabulary = [
-          lastElement,
-          ...vocabularies.slice(0, lastIndex),
-        ];
-        setVocabularies([...newVocabulary]);
+        moveCurrentCardtoButtom();
       }
     }, 200);
   };
@@ -76,7 +84,7 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
     }
   };
 
-  const renderCards = () => {
+  const renderCards = (vocabularies) => {
     return vocabularies.map(
       (
         { article, word, wordType, ipa, category, rating, translation, active },
@@ -122,6 +130,9 @@ export const CardStack = ({ vocabularies: vocabulariesprop }) => {
       }
     );
   };
-  return renderCards();
+  if (vocabularies.length === 0) {
+    return <EndCard />;
+  }
+  return renderCards(vocabularies);
 };
 export default CardStack;

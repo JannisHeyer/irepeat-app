@@ -1,4 +1,4 @@
-export const vocabularies = [
+export const vocabularyList = [
   {
     word: "Currywurst",
     article: "Die",
@@ -194,4 +194,4 @@ export const vocabularies = [
   },
 ];
 
-export default vocabularies;
+export default vocabularyList;
