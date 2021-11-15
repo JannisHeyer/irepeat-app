@@ -137,7 +137,7 @@ const StyledPopup = styled.div`
   background-color: white;
   border: var(--card-border);
   margin-bottom: 10rem;
-  & button {
+  button {
     color: white;
     margin-top: 1rem;
     border: none;
