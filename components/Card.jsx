@@ -20,9 +20,9 @@ export const Card = ({
   onDragEnd,
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-
   return (
     <>
+      <StyledCardContainer></StyledCardContainer>
       <StyledSwiper
         drag
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -46,8 +46,7 @@ export const Card = ({
               <h5>Category:</h5>
               <p>{category}</p>
               <p>-Rating-</p>
-              <StyledButton>Got it!</StyledButton>{" "}
-              <StyledButton>Repeat!</StyledButton>
+
               <StyledButton
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
@@ -58,8 +57,7 @@ export const Card = ({
             <StyledCardContainer className="cardBack">
               <h2>Translation:</h2>
               <h3>{translation}</h3>
-              <StyledButton>Got it!</StyledButton>{" "}
-              <StyledButton>Repeat!</StyledButton>
+
               <StyledButton
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
@@ -129,4 +127,23 @@ const StyledButton = styled.button`
   height: var(--button-height);
   width: var(--button-width);
   border-radius: var(--button-border-radius);
+`;
+const StyledPopup = styled.div`
+  position: relative;
+  text-align: center;
+  height: 70vw;
+  width: 70vw;
+  position: relative;
+  background-color: white;
+  border: var(--card-border);
+  margin-bottom: 10rem;
+  button {
+    color: white;
+    margin-top: 1rem;
+    border: none;
+    background-color: var(--main-color);
+    height: var(--button-height);
+    width: var(--button-width);
+    border-radius: var(--button-border-radius);
+  }
 `;
