@@ -12,6 +12,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
   const [newCard, setNewCard] = useState();
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
+  const openModal = () => setOpen(true);
 
   const onCreate = (newCard) => {
     if (vocabularies.find((card) => card.word === newCard.word)) {
