@@ -103,7 +103,6 @@ const StyledCardContainer = styled.div`
   transform-style: preserve-3d;
   background-color: var(--card-bgColor);
   border: var(--card-border);
-  //box-shadow: rgb(0 0 0 / 20%) 0px 25px 15px -10px;
 
   & li {
     float: left;

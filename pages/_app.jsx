@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }) {
     "vocabularies",
     vocabularyList
   );
-
   return (
     <>
       <GlobalStyles />
