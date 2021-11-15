@@ -9,7 +9,9 @@ import Card from "../components/Card";
 import inactiveCards from "../data/inactiveCards";
 import EndCard from "../components/EndCard";
 
+
 export const CardStack = ({ vocabularies, setVocabularies }) => {
+
   const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
