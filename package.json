@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "dayjs": "^1.10.7",
     "framer-motion": "^5.0.1",
     "next": "12.0.1",
     "react": "17.0.2",
@@ -19,6 +20,7 @@
     "react-stars": "^2.2.5",
     "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.3",
+    "supermemo": "^2.0.17",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

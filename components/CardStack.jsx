@@ -8,10 +8,15 @@ import React, { useState } from "react";
 import Card from "../components/Card";
 import inactiveCards from "../data/inactiveCards";
 import EndCard from "../components/EndCard";
+import dayjs from "dayjs";
+import { supermemo } from "supermemo";
 
-
-export const CardStack = ({ vocabularies, setVocabularies }) => {
-
+export const CardStack = ({
+  vocabularies,
+  setVocabularies,
+  isFLipped,
+  setIsFlipped,
+}) => {
   const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
@@ -47,20 +52,68 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       const lastIndex = vocabularies.length - 1;
       const lastElement = vocabularies[lastIndex];
 
+      //
+      function practice(lastElement) {
+        const { interval, repetition, efactor } = supermemo(
+          lastElement,
+          lastElement.grade
+        );
+        console.log(
+          `word: ${lastElement.word} from interval ${lastElement.interval} to ${interval}`
+        );
+
+        const dueDate = dayjs(Date.now()).add(interval, "day").toISOString();
+
+        return { ...lastElement, interval, repetition, efactor, dueDate };
+      }
+      //
+      const decreaseGrade = () => {
+        lastElement.grade = lastElement.grade - 1;
+        if (lastElement.grade <= 0) {
+          lastElement.grade = 0;
+        }
+        const updatedLastElement = practice(lastElement);
+        const newVocabulary = [
+          updatedLastElement,
+          ...vocabularies.slice(0, lastIndex),
+        ];
+        const sortedVocabularies = newVocabulary.sort((a, b) =>
+          dayjs(a).isAfter(dayjs(b)) ? 1 : -1
+        );
+        setVocabularies([...sortedVocabularies]);
+      };
+
+      const increadeGrade = () => {
+        lastElement.grade = lastElement.grade + 1;
+        const updatedLastElement = practice(lastElement);
+        const newVocabulary = [
+          updatedLastElement,
+          ...vocabularies.slice(0, lastIndex),
+        ];
+        const sortedVocabularies = newVocabulary.sort((a, b) =>
+          dayjs(a).isAfter(dayjs(b)) ? 1 : -1
+        );
+        setVocabularies([...sortedVocabularies]);
+      };
+
       const setCurrentCardInactive = () => {
+        if (lastElement.grade > 5) {
+          lastElement.grade = 0;
+        }
         lastElement.active = false;
         const allInactiveCards = vocabularies.filter(checkInactive);
         const allActiveCards = vocabularies.filter(checkActive);
         setVocabularies([...allActiveCards]);
         setInactive([...inactive, ...allInactiveCards]);
       };
-      const moveCurrentCardtoButtom = () => {
+      /*const moveCurrentCardtoButtom = () => {
+        lastElement.grade = lastElement.grade - 1;
         const newVocabulary = [
           lastElement,
           ...vocabularies.slice(0, lastIndex),
         ];
         setVocabularies([...newVocabulary]);
-      };
+      };*/
       function checkInactive(vocabularies) {
         return vocabularies.active === false;
       }
@@ -69,9 +122,12 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       }
 
       if (animation.x < 0) {
-        setCurrentCardInactive();
+        decreaseGrade();
       } else {
-        moveCurrentCardtoButtom();
+        increadeGrade();
+      }
+      if (lastElement.grade > 5) {
+        setCurrentCardInactive();
       }
     }, 200);
   };
@@ -89,12 +145,23 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
   const renderCards = (vocabularies) => {
     return vocabularies.map(
       (
-        { article, word, wordType, ipa, category, rating, translation, active },
+        {
+          article,
+          word,
+          wordType,
+          ipa,
+          category,
+          rating,
+          translation,
+          active,
+          dueDate,
+        },
         index
       ) => {
         if (index === vocabularies.length - 1) {
           return (
             <Card
+              dueDate={dueDate}
               active={active}
               key={word}
               word={word}
@@ -113,6 +180,7 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
         } else
           return (
             <Card
+              dueDate={dueDate}
               active={active}
               key={word}
               word={word}

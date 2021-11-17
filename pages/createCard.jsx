@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import Popup from "reactjs-popup";
+import dayjs from "dayjs";
 
 const CreateCard = ({ vocabularies, setVocabularies }) => {
   const { register, handleSubmit, watch, setValue, reset } = useForm();
@@ -12,10 +13,11 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
   const [newCard, setNewCard] = useState();
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
+  const openModal = () => setOpen(true);
 
   const onCreate = (newCard) => {
     if (vocabularies.find((card) => card.word === newCard.word)) {
-      setOpen(true);
+      openModal();
       reset();
     } else {
       setVocabularies([...vocabularies, newCard]);
@@ -49,20 +51,19 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
           {...register("category", { required: true }, { defaultValue: "" })}
           id="category"
         />
-        <label htmlFor="rating"></label>
-        <select
-          {...register("rating", { required: true }, { defaultValue: 10 })}
-        >
-          <option value="10">Easy</option>
-          <option value="20">Medium</option>
-          <option value="30">Hard</option>
-        </select>
       </StyledCardContainer>
       <StyledButton
         onClick={handleSubmit((newCard) => {
-          setNewCard(newCard);
-
-          onCreate(newCard);
+          const parsedNewCard = {
+            ...newCard,
+            grade: 0,
+            efactor: 2.5,
+            repetition: 0,
+            interval: 0,
+            dueDate: dayjs(Date.now()).toISOString(),
+          };
+          setNewCard(parsedNewCard);
+          onCreate(parsedNewCard);
         })}
       >
         Submit

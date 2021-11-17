@@ -2,11 +2,6 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const variants = {
-  front: { rotateY: 0 },
-  back: { rotateY: 180 },
-};
-
 export const Card = ({
   article,
   word,
@@ -18,17 +13,25 @@ export const Card = ({
   onDirectionLock,
   animate,
   onDragEnd,
+  dueDate,
 }) => {
+  const variants = {
+    front: { rotateY: 0 },
+    back: { rotateY: 180 },
+  };
+
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <>
-      <StyledCardContainer></StyledCardContainer>
       <StyledSwiper
         drag
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragDirectionLock
         onDirectionLock={onDirectionLock}
-        onDragEnd={onDragEnd}
+        onDragEnd={(e, info) => {
+          setIsFlipped(false);
+          onDragEnd(e, info);
+        }}
         animate={animate}
         style={style}
         transition={{ ease: [0.6, 0.05, -0.01, 0.9] }}
@@ -45,8 +48,8 @@ export const Card = ({
               <p>{ipa}</p>
               <h5>Category:</h5>
               <p>{category}</p>
-              <p>-Rating-</p>
-
+              <p>Due Date:</p>
+              <p>{dueDate}</p>
               <StyledButton
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
