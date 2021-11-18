@@ -3,19 +3,14 @@ import {
   useMotionValue,
   useTransform,
   useMotionTemplate,
-} from 'framer-motion';
-import React, { useEffect, useState } from 'react';
-import Card from '../components/Card';
-import inactiveCards from '../data/inactiveCards';
-import EndCard from '../components/EndCard';
-import { getNewCardsAfterPracticingBottomCard } from '../utils/practice';
+} from "framer-motion";
+import React, { useEffect, useState } from "react";
+import Card from "../components/Card";
+import inactiveCards from "../data/inactiveCards";
+import EndCard from "../components/EndCard";
+import { getNewCardsAfterPracticingBottomCard } from "../utils/practice";
 
-export const CardStack = ({
-  vocabularies,
-  setVocabularies,
-  isFLipped,
-  setIsFlipped,
-}) => {
+export const CardStack = ({ vocabularies, setVocabularies }) => {
   const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
@@ -24,19 +19,19 @@ export const CardStack = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const scale = useTransform(
-    dragStart.axis === 'x' ? x : y,
+    dragStart.axis === "x" ? x : y,
     [-175, 0, 175],
-    [1, 0.5, 1],
+    [1, 0.5, 1]
   );
   const shadowBlur = useTransform(
-    dragStart.axis === 'x' ? x : y,
+    dragStart.axis === "x" ? x : y,
     [-175, 0, 175],
-    [0, 25, 0],
+    [0, 25, 0]
   );
   const shadowOpacity = useTransform(
-    dragStart.axis === 'x' ? x : y,
+    dragStart.axis === "x" ? x : y,
     [-175, 0, 175],
-    [0, 0.2, 0],
+    [0, 0.2, 0]
   );
   const boxShadow = useMotionTemplate`0 ${shadowBlur}px 15px -10px rgba(0, 0, 0, ${shadowOpacity})`;
   const onDirectionLock = (axis) => setDragStart({ ...dragStart, axis: axis });
@@ -63,13 +58,13 @@ export const CardStack = ({
       console.log({ didDragLeft, grade });
 
       setVocabularies((vocabularies) =>
-        getNewCardsAfterPracticingBottomCard(vocabularies, grade),
+        getNewCardsAfterPracticingBottomCard(vocabularies, grade)
       );
     }, 200);
   };
 
   const onDragEnd = (info) => {
-    if (dragStart.axis === 'x') {
+    if (dragStart.axis === "x") {
       if (info.offset.x >= 200) animateCardSwipe({ x: 275, y: 0 });
       else if (info.offset.x <= -200) animateCardSwipe({ x: -275, y: 0 });
     } else {
@@ -87,7 +82,7 @@ export const CardStack = ({
           repetition: 0,
           active: true,
         }))
-        .sort((a, b) => b.efactor - a.efactor),
+        .sort((a, b) => b.efactor - a.efactor)
     );
   };
 
@@ -113,7 +108,7 @@ export const CardStack = ({
         active,
         dueDate,
       },
-      index,
+      index
     ) => {
       if (index === filteredVocabularies.length - 1) {
         return (
@@ -154,7 +149,7 @@ export const CardStack = ({
             }}
           />
         );
-    },
+    }
   );
 };
 export default CardStack;

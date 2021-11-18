@@ -51,6 +51,12 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
           {...register("category", { required: true }, { defaultValue: "" })}
           id="category"
         />
+        <label htmlFor="note">Add a note</label>
+        <StyledTextarea
+          placeholder="Optional"
+          {...register("note", { required: false })}
+          id="note"
+        ></StyledTextarea>
       </StyledCardContainer>
       <StyledButton
         onClick={handleSubmit((newCard) => {
@@ -120,4 +126,8 @@ const StyledPopup = styled.div`
     width: var(--button-width);
     border-radius: var(--button-border-radius);
   }
+`;
+const StyledTextarea = styled.textarea`
+  max-width: 100%;
+  max-height: 50%;
 `;

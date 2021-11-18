@@ -3,17 +3,16 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 export const Card = ({
-  article,
   word,
-  wordType,
-  ipa,
   category,
   translation,
   style,
   onDirectionLock,
   animate,
   onDragEnd,
-  dueDate,
+  grade,
+  note,
+  note2,
 }) => {
   const variants = {
     front: { rotateY: 0 },
@@ -21,6 +20,7 @@ export const Card = ({
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <>
       <StyledSwiper
@@ -42,25 +42,31 @@ export const Card = ({
         >
           {!isFlipped ? (
             <StyledCardContainer>
-              <h2>{article}</h2>
+              <span>&#10005;</span>
               <h1>{word}</h1>
-              <p>{wordType}</p>
-              <p>{ipa}</p>
-              <h5>Category:</h5>
-              <p>{category}</p>
-              <p>Due Date:</p>
-              <p>{dueDate}</p>
+              <p>
+                <span>Category:</span> {category}
+              </p>
+              <p>
+                <span>Your note:</span>
+                {note}
+              </p>
               <StyledButton
+                className="frontButton"
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
                 Translation
               </StyledButton>
+              <p>
+                You need <span>{6 - grade}</span> repetition to complete the
+                card
+              </p>
             </StyledCardContainer>
           ) : (
             <StyledCardContainer className="cardBack">
               <h2>Translation:</h2>
               <h3>{translation}</h3>
-
+              <p>Your Note: {note2}</p>
               <StyledButton
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
@@ -81,8 +87,8 @@ export default Card;
 
 const StyledSwiper = styled(motion.div)`
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: -2.5%;
+  top: 15%;
   width: var(--card-width);
   height: var(--card-height);
   margin: var(--card-margin);
@@ -102,12 +108,14 @@ const StyledCardContainer = styled.div`
   height: 100%;
   position: absolute;
   top: 0;
+
   text-align: center;
   transform-style: preserve-3d;
   background-color: var(--card-bgColor);
   border: var(--card-border);
 
   & li {
+    color: black;
     float: left;
   }
 
@@ -117,8 +125,15 @@ const StyledCardContainer = styled.div`
       margin-bottom: 3rem;
     }
     & h3 {
-      margin-bottom: 11.97rem;
+      margin-bottom: 0;
     }
+  }
+  & .frontButton {
+    position: relative;
+    top: 6%;
+  }
+  & span {
+    color: var(--main-color);
   }
 `;
 
@@ -130,23 +145,4 @@ const StyledButton = styled.button`
   height: var(--button-height);
   width: var(--button-width);
   border-radius: var(--button-border-radius);
-`;
-const StyledPopup = styled.div`
-  position: relative;
-  text-align: center;
-  height: 70vw;
-  width: 70vw;
-  position: relative;
-  background-color: white;
-  border: var(--card-border);
-  margin-bottom: 10rem;
-  & button {
-    color: white;
-    margin-top: 1rem;
-    border: none;
-    background-color: var(--main-color);
-    height: var(--button-height);
-    width: var(--button-width);
-    border-radius: var(--button-border-radius);
-  }
 `;

@@ -11,8 +11,10 @@ const GlobalStyles = createGlobalStyle`
 --button-width: 6.5rem;
 
 // Card-Styling //
---card-height: 455.13px;
---card-width: 279px;
+/*--card-height: 455.13px;
+--card-width: 279px;*/
+--card-height: 300px;
+--card-width: 300px;
 --card-margin: 5rem 3rem 0rem 3rem;
 --card-border: 1px solid #70abaf;
 --card-bgColor: white;

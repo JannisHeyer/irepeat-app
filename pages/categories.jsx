@@ -1,15 +1,8 @@
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
+import styled from "styled-components";
 
-const Categories = () => {
-  return (
-    <>
-      <Header pageTitle="Categories" />
-      <section>
-        <p>Categories</p>
-      </section>
-      <Navbar />
-    </>
-  );
+const Categories = ({ vocabularies, setVocabularies }) => {
+  return null;
 };
 export default Categories;

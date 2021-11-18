@@ -1,24 +1,24 @@
 import styled from "styled-components";
-import Link from "next/link";
+import ActiveLink from "./ActiveLink";
 
 export const Navbar = () => {
   return (
     <StyledNavContainer>
       <ul>
         <li>
-          <Link href="/">
+          <ActiveLink activeClassName="active" href="/">
             <a>Home</a>
-          </Link>
+          </ActiveLink>
         </li>
         <li>
-          <Link href="/createCard">
+          <ActiveLink activeClassName="active" href="/createCard">
             <a>Add a Card</a>
-          </Link>
+          </ActiveLink>
         </li>
         <li>
-          <Link href="/categories">
+          <ActiveLink activeClassName="active" href="/categories">
             <a>Categories</a>
-          </Link>
+          </ActiveLink>
         </li>
       </ul>
     </StyledNavContainer>
@@ -28,23 +28,32 @@ export const Navbar = () => {
 /// STYLES ///
 
 const StyledNavContainer = styled.div`
-  top: 185vw;
+  top: 200vw;
+  margin: 0;
+  padding: 0.8rem;
   width: 100vw;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  border-top: 1px solid black;
   position: fixed;
   z-index: 1;
-  cursor: pointer;
+  background-color: white;
 
   & ul {
+    margin: 0;
     background-color: white;
     padding: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    border: 3px solid var(--main-color);
     border-radius: 2rem;
     column-gap: 2rem;
+    a {
+      color: black;
+    }
+
+    .active {
+      color: var(--main-color);
+    }
 
     & li {
       display: flex;

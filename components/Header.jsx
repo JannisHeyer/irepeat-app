@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import InfoButton from "./InfoButton";
 
 export const Header = ({ pageTitle, isMainTitle }) => {
-  return <StyledHeader isMainTitle={isMainTitle}>{pageTitle}</StyledHeader>;
+  return (
+    <>
+      <StyledHeader isMainTitle={isMainTitle}>
+        <InfoButton />
+        {pageTitle}
+      </StyledHeader>
+    </>
+  );
 };
 
 ///STYLES///
