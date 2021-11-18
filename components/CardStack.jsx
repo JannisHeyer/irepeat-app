@@ -3,13 +3,12 @@ import {
   useMotionValue,
   useTransform,
   useMotionTemplate,
-} from "framer-motion";
-import React, { useState } from "react";
-import Card from "../components/Card";
-import inactiveCards from "../data/inactiveCards";
-import EndCard from "../components/EndCard";
-import dayjs from "dayjs";
-import { supermemo } from "supermemo";
+} from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import Card from '../components/Card';
+import inactiveCards from '../data/inactiveCards';
+import EndCard from '../components/EndCard';
+import { getNewCardsAfterPracticingBottomCard } from '../utils/practice';
 
 export const CardStack = ({
   vocabularies,
@@ -25,19 +24,19 @@ export const CardStack = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const scale = useTransform(
-    dragStart.axis === "x" ? x : y,
+    dragStart.axis === 'x' ? x : y,
     [-175, 0, 175],
-    [1, 0.5, 1]
+    [1, 0.5, 1],
   );
   const shadowBlur = useTransform(
-    dragStart.axis === "x" ? x : y,
+    dragStart.axis === 'x' ? x : y,
     [-175, 0, 175],
-    [0, 25, 0]
+    [0, 25, 0],
   );
   const shadowOpacity = useTransform(
-    dragStart.axis === "x" ? x : y,
+    dragStart.axis === 'x' ? x : y,
     [-175, 0, 175],
-    [0, 0.2, 0]
+    [0, 0.2, 0],
   );
   const boxShadow = useMotionTemplate`0 ${shadowBlur}px 15px -10px rgba(0, 0, 0, ${shadowOpacity})`;
   const onDirectionLock = (axis) => setDragStart({ ...dragStart, axis: axis });
@@ -49,91 +48,28 @@ export const CardStack = ({
       x.set(0);
       y.set(0);
 
-      const lastIndex = vocabularies.length - 1;
-      const lastElement = vocabularies[lastIndex];
+      const didDragLeft = animation.x < 0;
+      /**
+       * grade:
+       *   5: perfect response.
+       *   4: correct response after a hesitation.
+       *   3: correct response recalled with serious difficulty.
+       *   2: incorrect response; where the correct one seemed easy to recall.
+       *   1: incorrect response; the correct one remembered.
+       *   0: complete blackout.
+       */
+      const grade = didDragLeft ? 1 : 5;
 
-      //
-      function practice(lastElement) {
-        const { interval, repetition, efactor } = supermemo(
-          lastElement,
-          lastElement.grade
-        );
-        console.log(
-          `word: ${lastElement.word} from interval ${lastElement.interval} to ${interval}`
-        );
+      console.log({ didDragLeft, grade });
 
-        const dueDate = dayjs(Date.now()).add(interval, "day").toISOString();
-
-        return { ...lastElement, interval, repetition, efactor, dueDate };
-      }
-      //
-      const decreaseGrade = () => {
-        lastElement.grade = lastElement.grade - 1;
-        if (lastElement.grade <= 0) {
-          lastElement.grade = 0;
-        }
-        const updatedLastElement = practice(lastElement);
-        const newVocabulary = [
-          updatedLastElement,
-          ...vocabularies.slice(0, lastIndex),
-        ];
-        const sortedVocabularies = newVocabulary.sort((a, b) =>
-          dayjs(a).isAfter(dayjs(b)) ? 1 : -1
-        );
-        setVocabularies([...sortedVocabularies]);
-      };
-
-      const increadeGrade = () => {
-        lastElement.grade = lastElement.grade + 1;
-        const updatedLastElement = practice(lastElement);
-        const newVocabulary = [
-          updatedLastElement,
-          ...vocabularies.slice(0, lastIndex),
-        ];
-        const sortedVocabularies = newVocabulary.sort((a, b) =>
-          dayjs(a).isAfter(dayjs(b)) ? 1 : -1
-        );
-        setVocabularies([...sortedVocabularies]);
-      };
-
-      const setCurrentCardInactive = () => {
-        if (lastElement.grade > 5) {
-          lastElement.grade = 0;
-        }
-        lastElement.active = false;
-        const allInactiveCards = vocabularies.filter(checkInactive);
-        const allActiveCards = vocabularies.filter(checkActive);
-        setVocabularies([...allActiveCards]);
-        setInactive([...inactive, ...allInactiveCards]);
-      };
-      /*const moveCurrentCardtoButtom = () => {
-        lastElement.grade = lastElement.grade - 1;
-        const newVocabulary = [
-          lastElement,
-          ...vocabularies.slice(0, lastIndex),
-        ];
-        setVocabularies([...newVocabulary]);
-      };*/
-      function checkInactive(vocabularies) {
-        return vocabularies.active === false;
-      }
-      function checkActive(vocabularies) {
-        return vocabularies.active === true;
-      }
-
-      if (animation.x < 0) {
-        decreaseGrade();
-      } else {
-        increadeGrade();
-      }
-      if (lastElement.grade > 5) {
-        setCurrentCardInactive();
-      }
+      setVocabularies((vocabularies) =>
+        getNewCardsAfterPracticingBottomCard(vocabularies, grade),
+      );
     }, 200);
   };
 
   const onDragEnd = (info) => {
-    if (dragStart.axis === "x") {
+    if (dragStart.axis === 'x') {
       if (info.offset.x >= 200) animateCardSwipe({ x: 275, y: 0 });
       else if (info.offset.x <= -200) animateCardSwipe({ x: -275, y: 0 });
     } else {
@@ -142,67 +78,83 @@ export const CardStack = ({
     }
   };
 
-  const renderCards = (vocabularies) => {
-    return vocabularies.map(
-      (
-        {
-          article,
-          word,
-          wordType,
-          ipa,
-          category,
-          rating,
-          translation,
-          active,
-          dueDate,
-        },
-        index
-      ) => {
-        if (index === vocabularies.length - 1) {
-          return (
-            <Card
-              dueDate={dueDate}
-              active={active}
-              key={word}
-              word={word}
-              article={article}
-              wordType={wordType}
-              ipa={ipa}
-              category={category}
-              rating={rating}
-              translation={translation}
-              style={{ x, y, zIndex: index }}
-              onDirectionLock={(axis) => onDirectionLock(axis)}
-              onDragEnd={(e, info) => onDragEnd(info)}
-              animate={dragStart.animation}
-            />
-          );
-        } else
-          return (
-            <Card
-              dueDate={dueDate}
-              active={active}
-              key={word}
-              word={word}
-              article={article}
-              wordType={wordType}
-              ipa={ipa}
-              category={category}
-              rating={rating}
-              translation={translation}
-              style={{
-                scale,
-                boxShadow,
-                zIndex: index,
-              }}
-            />
-          );
-      }
+  const handleReset = () => {
+    setVocabularies((vocabularies) =>
+      vocabularies
+        .map((card) => ({
+          ...card,
+          interval: 0,
+          repetition: 0,
+          active: true,
+        }))
+        .sort((a, b) => b.efactor - a.efactor),
     );
   };
-  if (vocabularies.length === 0) {
-    return <EndCard />;
+
+  useEffect(() => {
+    console.table(vocabularies);
+  }, [vocabularies]);
+
+  const filteredVocabularies = vocabularies.filter(({ active }) => active);
+
+  if (filteredVocabularies.length === 0) {
+    return <EndCard onReset={handleReset} />;
   }
-  return renderCards(vocabularies);
+  return filteredVocabularies.map(
+    (
+      {
+        article,
+        word,
+        wordType,
+        ipa,
+        category,
+        rating,
+        translation,
+        active,
+        dueDate,
+      },
+      index,
+    ) => {
+      if (index === filteredVocabularies.length - 1) {
+        return (
+          <Card
+            dueDate={dueDate}
+            active={active}
+            key={word}
+            word={word}
+            article={article}
+            wordType={wordType}
+            ipa={ipa}
+            category={category}
+            rating={rating}
+            translation={translation}
+            style={{ x, y, zIndex: index }}
+            onDirectionLock={(axis) => onDirectionLock(axis)}
+            onDragEnd={(e, info) => onDragEnd(info)}
+            animate={dragStart.animation}
+          />
+        );
+      } else
+        return (
+          <Card
+            dueDate={dueDate}
+            active={active}
+            key={word}
+            word={word}
+            article={article}
+            wordType={wordType}
+            ipa={ipa}
+            category={category}
+            rating={rating}
+            translation={translation}
+            style={{
+              scale,
+              boxShadow,
+              zIndex: index,
+            }}
+          />
+        );
+    },
+  );
 };
 export default CardStack;
