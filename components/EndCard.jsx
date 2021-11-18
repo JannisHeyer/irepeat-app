@@ -1,7 +1,7 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link';
+import styled from 'styled-components';
 
-export const EndCard = () => {
+export const EndCard = ({ onReset }) => {
   return (
     <StyledCardContainer>
       <h3>Congratulations 🎉</h3>
@@ -11,6 +11,15 @@ export const EndCard = () => {
           <p>Add cards</p>
         </Link>
       </button>
+      <div>
+        <button
+          onClick={() => {
+            onReset();
+          }}
+        >
+          Continue learning
+        </button>
+      </div>
     </StyledCardContainer>
   );
 };
