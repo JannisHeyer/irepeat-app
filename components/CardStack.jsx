@@ -1,17 +1,10 @@
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useMotionTemplate,
-} from "framer-motion";
+import { useMotionValue, useTransform, useMotionTemplate } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import inactiveCards from "../data/inactiveCards";
 import EndCard from "../components/EndCard";
 import { getNewCardsAfterPracticingBottomCard } from "../utils/practice";
 
 export const CardStack = ({ vocabularies, setVocabularies }) => {
-  const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
     animation: { x: 0, y: 0 },
@@ -44,15 +37,7 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       y.set(0);
 
       const didDragLeft = animation.x < 0;
-      /**
-       * grade:
-       *   5: perfect response.
-       *   4: correct response after a hesitation.
-       *   3: correct response recalled with serious difficulty.
-       *   2: incorrect response; where the correct one seemed easy to recall.
-       *   1: incorrect response; the correct one remembered.
-       *   0: complete blackout.
-       */
+
       const grade = didDragLeft ? 1 : 5;
 
       console.log({ didDragLeft, grade });
@@ -96,32 +81,15 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
     return <EndCard onReset={handleReset} />;
   }
   return filteredVocabularies.map(
-    (
-      {
-        article,
-        word,
-        wordType,
-        ipa,
-        category,
-        rating,
-        translation,
-        active,
-        dueDate,
-      },
-      index
-    ) => {
+    ({ note, word, category, translation, active }, index) => {
       if (index === filteredVocabularies.length - 1) {
         return (
           <Card
-            dueDate={dueDate}
             active={active}
             key={word}
             word={word}
-            article={article}
-            wordType={wordType}
-            ipa={ipa}
+            note={note}
             category={category}
-            rating={rating}
             translation={translation}
             style={{ x, y, zIndex: index }}
             onDirectionLock={(axis) => onDirectionLock(axis)}
@@ -132,15 +100,11 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       } else
         return (
           <Card
-            dueDate={dueDate}
             active={active}
             key={word}
             word={word}
-            article={article}
-            wordType={wordType}
-            ipa={ipa}
+            note={note}
             category={category}
-            rating={rating}
             translation={translation}
             style={{
               scale,

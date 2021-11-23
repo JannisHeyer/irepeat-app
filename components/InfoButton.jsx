@@ -21,15 +21,13 @@ export const InfoButton = () => {
         </StyledIcon>
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
           <StyledPopup>
-            <h3>Instructions:</h3>
+            <h3>First you repeat then you succeed</h3>
             <p>
-              Swipe right if got the card right but want to keep practicing it.
-              Swipe left if you got the card wrong. Based on your performance
-              cards will appear more often or less frequently in your stack. Get
-              a card right multiple times in a row and it will be removed from
-              the stack automatically. You can always remove cards from your
-              stack manually, add new ones or put inactive cards back in your
-              stack.
+              Swipe right if you got the card right but want to keep practicing
+              it. Swipe left if you got the card wrong. Based on your
+              performance cards will appear more often or less frequently in
+              your stack. Get a card right multiple times in a row and it will
+              be removed from the stack automatically.
             </p>
             <button onClick={closeModal}>Got it!</button>
           </StyledPopup>
@@ -44,8 +42,8 @@ const StyledPopup = styled.div`
   top: 10vw;
   position: relative;
   text-align: center;
-  height: 95vw;
-  width: 95vw;
+  height: 50vh;
+  width: 80vw;
   position: relative;
   background-color: white;
   border: var(--card-border);
@@ -53,7 +51,6 @@ const StyledPopup = styled.div`
   & button {
     color: white;
     margin-top: 1rem;
-    border: none;
     background-color: var(--main-color);
     height: var(--button-height);
     width: var(--button-width);

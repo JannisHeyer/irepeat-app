@@ -15,11 +15,6 @@ export const Navbar = () => {
             <a>Add a Card</a>
           </ActiveLink>
         </li>
-        <li>
-          <ActiveLink activeClassName="active" href="/categories">
-            <a>Categories</a>
-          </ActiveLink>
-        </li>
       </ul>
     </StyledNavContainer>
   );
@@ -28,34 +23,30 @@ export const Navbar = () => {
 /// STYLES ///
 
 const StyledNavContainer = styled.div`
-  top: 200vw;
+  bottom: 0;
+  position: fixed;
   margin: 0;
-  padding: 0.8rem;
   width: 100vw;
   text-align: center;
-  border-top: 1px solid black;
-  position: fixed;
   z-index: 1;
-  background-color: white;
 
   & ul {
     margin: 0;
-    background-color: white;
+    background-color: #636363;
     padding: 0;
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
-    border-radius: 2rem;
-    column-gap: 2rem;
+
     a {
-      color: black;
+      color: white;
     }
 
     .active {
-      color: var(--main-color);
+      color: #87c1c5;
     }
 
     & li {
+      padding: 1rem;
       display: flex;
       justify-content: space-around;
     }

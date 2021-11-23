@@ -10,9 +10,7 @@ export const Card = ({
   onDirectionLock,
   animate,
   onDragEnd,
-  grade,
   note,
-  note2,
 }) => {
   const variants = {
     front: { rotateY: 0 },
@@ -42,13 +40,12 @@ export const Card = ({
         >
           {!isFlipped ? (
             <StyledCardContainer>
-              <span>&#10005;</span>
               <h1>{word}</h1>
               <p>
                 <span>Category:</span> {category}
               </p>
               <p>
-                <span>Your note:</span>
+                <span>Your note: </span>
                 {note}
               </p>
               <StyledButton
@@ -57,17 +54,13 @@ export const Card = ({
               >
                 Translation
               </StyledButton>
-              <p>
-                You need <span>{6 - grade}</span> repetition to complete the
-                card
-              </p>
             </StyledCardContainer>
           ) : (
             <StyledCardContainer className="cardBack">
-              <h2>Translation:</h2>
-              <h3>{translation}</h3>
-              <p>Your Note: {note2}</p>
+              <h1>{translation}</h1>
+
               <StyledButton
+                className="backButton"
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}
               >
                 Back!
@@ -82,22 +75,15 @@ export const Card = ({
 
 export default Card;
 
-// FIXME: Boxshadow not showing on first card.
-// FIXME: Card changes size on flip(?).
-
 const StyledSwiper = styled(motion.div)`
   position: absolute;
-  left: -2.5%;
-  top: 15%;
   width: var(--card-width);
   height: var(--card-height);
-  margin: var(--card-margin);
 `;
 
 const StyledFlipper = styled(motion.div)`
   width: 100%;
   height: 100%;
-
   background-color: transparent;
   position: relative;
   perspective: 1000px;
@@ -107,12 +93,15 @@ const StyledCardContainer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
-
   text-align: center;
   transform-style: preserve-3d;
+  border-radius: 7px;
   background-color: var(--card-bgColor);
   border: var(--card-border);
+
+  & h1 {
+    text-align: center;
+  }
 
   & li {
     color: black;
@@ -121,6 +110,7 @@ const StyledCardContainer = styled.div`
 
   &.cardBack {
     transform: rotateY(180deg);
+
     & h2 {
       margin-bottom: 3rem;
     }
@@ -128,12 +118,12 @@ const StyledCardContainer = styled.div`
       margin-bottom: 0;
     }
   }
-  & .frontButton {
-    position: relative;
-    top: 6%;
-  }
   & span {
     color: var(--main-color);
+  }
+  .backButton {
+    position: relative;
+    top: 4.2rem;
   }
 `;
 

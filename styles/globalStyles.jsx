@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 :root {
   // Colors //
 --main-color: #70abaf;
@@ -15,23 +15,35 @@ const GlobalStyles = createGlobalStyle`
 --card-width: 279px;*/
 --card-height: 300px;
 --card-width: 300px;
---card-margin: 5rem 3rem 0rem 3rem;
---card-border: 1px solid #70abaf;
+
+--card-border: 2px solid #70abaf;
 --card-bgColor: white;
+
+// Card positioning //
+
+
 }
 
 html,
 body {
-  
+  height: 100vh;
+  width: 100vw;
   user-select: none;
   padding: 0;
   margin: 0;
   
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-& main{
 
 }
+
+main {
+  display: flex;
+  height: 80vh;
+ margin: 10vh auto 10vh auto;
+ justify-content: center;
+ align-items: center;
+
 }
 
 a {
@@ -47,6 +59,7 @@ li {
   box-sizing: border-box;
 
 }
+button {
+  border: none;
+}
 `;
-
-export default GlobalStyles;
