@@ -1,7 +1,6 @@
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import CardStack from "../components/CardStack";
-import { getCards } from "../utils/getCards";
 
 export default function Home({ vocabularies, setVocabularies }) {
   return (
