@@ -69,8 +69,6 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
     );
   };
 
-  useEffect(() => {}, [vocabularies]);
-
   const filteredVocabularies = vocabularies.filter(({ active }) => active);
 
   if (filteredVocabularies.length === 0) {
