@@ -1,16 +1,28 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-export const EndCard = () => {
+export const EndCard = ({ onReset }) => {
   return (
     <StyledCardContainer>
-      <h3>Congratulations 🎉</h3>
+      <h3 className="animate__animated animate__rubberBand">
+        Congratulations 🎉
+      </h3>
       <p>Awsome! You have completed your current stack of cards.</p>
-      <button>
-        <Link href="/createCard">
-          <p>Add cards</p>
-        </Link>
-      </button>
+      <StyledWrapper>
+        <button>
+          <Link href="/createCard">
+            <p>Add cards</p>
+          </Link>
+        </button>
+
+        <button
+          onClick={() => {
+            onReset();
+          }}
+        >
+          Continue learning
+        </button>
+      </StyledWrapper>
     </StyledCardContainer>
   );
 };
@@ -21,7 +33,8 @@ const StyledCardContainer = styled.div`
   height: var(--card-height);
   margin: var(--card-margin);
   position: absolute;
-  top: 0;
+  top: var(--card-position-top);
+  left: var(--card-position-left);
   text-align: center;
   transform-style: preserve-3d;
   background-color: var(--card-bgColor);
@@ -33,7 +46,14 @@ const StyledCardContainer = styled.div`
   & p {
     margin-top: 3rem;
   }
+`;
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
   & button {
+    margin: 0.5rem;
     margin-top: 3rem;
     color: white;
     border: none;

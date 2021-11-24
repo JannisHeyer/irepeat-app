@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import InfoButton from "./InfoButton";
 
 export const Header = ({ pageTitle, isMainTitle }) => {
-  return <StyledHeader isMainTitle={isMainTitle}>{pageTitle}</StyledHeader>;
+  return (
+    <>
+      <StyledHeader isMainTitle={isMainTitle}>
+        <InfoButton />
+        {pageTitle}
+      </StyledHeader>
+    </>
+  );
 };
 
 ///STYLES///
@@ -12,12 +20,12 @@ const StyledHeader = styled.h1`
   padding: 0.8rem;
   width: 100vw;
   text-align: center;
-  border-bottom: 1px solid black;
   position: fixed;
   z-index: 1;
-  background-color: white;
+  color: black;
+  background-color: var(--main-color);
   &::first-letter {
-    color: ${(props) => (props.isMainTitle ? "var(--main-color)" : undefined)};
+    color: ${(props) => (props.isMainTitle ? "white" : undefined)};
     z-index: 1;
   }
 `;

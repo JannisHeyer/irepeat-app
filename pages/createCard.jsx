@@ -4,22 +4,28 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
-import Popup from "reactjs-popup";
+import { useAlert } from "react-alert";
 
 const CreateCard = ({ vocabularies, setVocabularies }) => {
-  const { register, handleSubmit, watch, setValue, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
   useFormPersist("form", { watch, setValue });
   const [newCard, setNewCard] = useState();
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
+
 
   const onCreate = (newCard) => {
     if (vocabularies.find((card) => card.word === newCard.word)) {
-      setOpen(true);
+      alert.show("Card is already in your stack", { type: "error" });
       reset();
     } else {
       setVocabularies([...vocabularies, newCard]);
+      alert.show("Card has been added", { type: "success" });
       reset();
     }
   };
@@ -27,97 +33,207 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
   return (
     <>
       <Header pageTitle="Add a card" />
-      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-        <StyledPopup>
-          <h3>Note</h3>
-          <p>This word is already in your stack!</p>
-          <button onClick={closeModal}>Ok!</button>
-        </StyledPopup>
-      </Popup>
-      <StyledCardContainer>
-        <label htmlFor="word">German Word:</label>
-        <input
-          {...register("word", { required: true }, { defaultValue: "" })}
-          id="word"
-        />
-        <label htmlFor="translation">Translation:</label>
-        <input
-          {...register("translation", { required: true }, { defaultValue: "" })}
-          id="translation"
-        />
-        <label htmlFor="category">Category:</label>
-        <input
-          {...register("category", { required: true }, { defaultValue: "" })}
-          id="category"
-        />
-        <label htmlFor="rating"></label>
-        <select
-          {...register("rating", { required: true }, { defaultValue: 10 })}
-        >
-          <option value="10">Easy</option>
-          <option value="20">Medium</option>
-          <option value="30">Hard</option>
-        </select>
-      </StyledCardContainer>
-      <StyledButton
-        onClick={handleSubmit((newCard) => {
-          setNewCard(newCard);
+      <Wrapper>
+        <StyledCardContainer>
+          <StyledFormContainer>
+            {/* ----------Vocabulary--------------- */}
+            {errors.word && errors.word.type === "pattern" && (
+              <span className="error" role="alert">
+                {errors.word.message}
+              </span>
+            )}
 
-          onCreate(newCard);
-        })}
-      >
-        Submit
-      </StyledButton>{" "}
-      <StyledButton
-        onClick={() => {
-          reset();
-        }}
-      >
-        Reset
-      </StyledButton>
+            {errors.word && errors.word.type === "required" && (
+              <span className="error" role="alert">
+                Vocabulary is required
+              </span>
+            )}
+            {errors.word && errors.word.type === "maxLength" && (
+              <span className="error" role="alert">
+                Max length exceeded
+              </span>
+            )}
+            <input
+              autoComplete="off"
+              min="1"
+              max="50"
+              aria-invalid={errors.word ? "true" : "false"}
+              placeholder="Vocabulary..."
+              {...register(
+                "word",
+                {
+                  required: true,
+                  maxLength: 15,
+                  minLength: 1,
+                  pattern: {
+                    value: /^[A-Za-z]+$/i,
+                    message: "Invalid Input.",
+                  },
+                },
+                { defaultValue: "" }
+              )}
+              id="word"
+            />
+            {/* ----------Translation--------------- */}
+            {errors.translation && errors.translation.type === "pattern" && (
+              <span className="error" role="alert">
+                {errors.translation.message}
+              </span>
+            )}
+            {errors.translation && errors.translation.type === "required" && (
+              <span className="error" role="alert">
+                Translation is required
+              </span>
+            )}
+            {errors.translation && errors.translation.type === "maxLength" && (
+              <span className="error" role="alert">
+                Max length exceeded
+              </span>
+            )}
+
+            <input
+              autoComplete="off"
+              placeholder="Trabslation..."
+              {...register(
+                "translation",
+                {
+                  required: true,
+                  maxLength: 15,
+                  minLength: 1,
+                  pattern: {
+                    value: /^[A-Za-z]+$/i,
+                    message: "Invalid Input.",
+                  },
+                },
+                { defaultValue: "" }
+              )}
+              id="translation"
+            />
+            {/* ----------Category--------------- */}
+            {errors.category && errors.category.type === "required" && (
+              <span className="error" role="alert">
+                {errors.category.message}
+              </span>
+            )}
+            {errors.category && errors.category.type === "required" && (
+              <span className="error" role="alert">
+                Category is required
+              </span>
+            )}
+            {errors.category && errors.category.type === "maxLength" && (
+              <span className="error" role="alert">
+                Max length exceeded
+              </span>
+            )}
+            <input
+              autoComplete="off"
+              placeholder="Category..."
+              {...register(
+                "category",
+                {
+                  required: true,
+                  maxLength: 15,
+                  minLength: 1,
+                  pattern: {
+                    value: /^[A-Za-z]+$/i,
+                    message: "Invalid Input.",
+                  },
+                },
+                { defaultValue: "" }
+              )}
+              id="category"
+            />
+            {/* ----------Note--------------- */}
+            {errors.note && errors.note.type === "maxLength" && (
+              <div className="error" role="alert">
+                Max length exceeded
+              </div>
+            )}
+            <input
+              placeholder="Optional note..."
+              {...register("note", {
+                required: false,
+                maxLength: 15,
+              })}
+              id="note"
+            />
+
+            <p>Create your own card which will be displayed in your stack</p>
+            <ButtonWrapper>
+              <StyledButton
+                onClick={handleSubmit((newCard) => {
+                  const parsedNewCard = {
+                    ...newCard,
+                    grade: 0,
+                    efactor: 2.5,
+                    repetition: 0,
+                    interval: 0,
+                  };
+                  setNewCard(parsedNewCard);
+                  onCreate(parsedNewCard);
+                })}
+              >
+                Submit
+              </StyledButton>{" "}
+              <StyledButton
+                onClick={() => {
+                  reset();
+                }}
+              >
+                Reset
+              </StyledButton>
+            </ButtonWrapper>
+          </StyledFormContainer>
+        </StyledCardContainer>
+      </Wrapper>
       <Navbar />
     </>
   );
 };
 export default CreateCard;
+const Wrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
 
 const StyledCardContainer = styled.form`
-  z-index: 1;
+  padding: 2rem;
+  align-self: center;
   width: var(--card-width);
-  height: var(--card-height);
+  height: fit-content;
   margin: var(--card-margin);
   text-align: center;
   background-color: var(--card-bgColor);
   border: var(--card-border);
+  box-shadow: rgb(0 0 0 / 20%) 0px 25px 15px -10px;
+  .error {
+    text-align: center;
+    color: #f04419;
+  }
+`;
+
+const StyledFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin: 0 0 5% 0;
+    border: 1px solid var(--main-color);
+  }
+`;
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10%;
+  justify-content: space-between;
 `;
 const StyledButton = styled.button`
-  margin-top: 1rem;
-  margin-left: 3.3rem;
   color: white;
-  border: none;
-  margin-bottom: 2rem;
   background-color: var(--main-color);
   height: var(--button-height);
   width: var(--button-width);
   border-radius: var(--button-border-radius);
-`;
-
-const StyledPopup = styled.div`
-  position: relative;
-  text-align: center;
-  height: 50vw;
-  width: 50vw;
-  position: relative;
-  background-color: white;
-  border: var(--card-border);
-  margin-bottom: 10rem;
-  & button {
-    color: white;
-    margin-top: 1rem;
-    border: none;
-    background-color: var(--main-color);
-    height: var(--button-height);
-    width: var(--button-width);
-    border-radius: var(--button-border-radius);
-  }
 `;

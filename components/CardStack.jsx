@@ -1,18 +1,10 @@
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useMotionTemplate,
-} from "framer-motion";
-import React, { useState } from "react";
+import { useMotionValue, useTransform, useMotionTemplate } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import inactiveCards from "../data/inactiveCards";
 import EndCard from "../components/EndCard";
-
+import { getNewCardsAfterPracticingBottomCard } from "../utils/practice";
 
 export const CardStack = ({ vocabularies, setVocabularies }) => {
-
-  const [inactive, setInactive] = useState(inactiveCards);
   const [dragStart, setDragStart] = useState({
     axis: null,
     animation: { x: 0, y: 0 },
@@ -44,35 +36,15 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       x.set(0);
       y.set(0);
 
-      const lastIndex = vocabularies.length - 1;
-      const lastElement = vocabularies[lastIndex];
+      const didDragLeft = animation.x < 0;
 
-      const setCurrentCardInactive = () => {
-        lastElement.active = false;
-        const allInactiveCards = vocabularies.filter(checkInactive);
-        const allActiveCards = vocabularies.filter(checkActive);
-        setVocabularies([...allActiveCards]);
-        setInactive([...inactive, ...allInactiveCards]);
-      };
-      const moveCurrentCardtoButtom = () => {
-        const newVocabulary = [
-          lastElement,
-          ...vocabularies.slice(0, lastIndex),
-        ];
-        setVocabularies([...newVocabulary]);
-      };
-      function checkInactive(vocabularies) {
-        return vocabularies.active === false;
-      }
-      function checkActive(vocabularies) {
-        return vocabularies.active === true;
-      }
+      const grade = didDragLeft ? 1 : 5;
 
-      if (animation.x < 0) {
-        setCurrentCardInactive();
-      } else {
-        moveCurrentCardtoButtom();
-      }
+      //console.log({ didDragLeft, grade });
+
+      setVocabularies((vocabularies) =>
+        getNewCardsAfterPracticingBottomCard(vocabularies, grade)
+      );
     }, 200);
   };
 
@@ -86,55 +58,62 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
     }
   };
 
-  const renderCards = (vocabularies) => {
-    return vocabularies.map(
-      (
-        { article, word, wordType, ipa, category, rating, translation, active },
-        index
-      ) => {
-        if (index === vocabularies.length - 1) {
-          return (
-            <Card
-              active={active}
-              key={word}
-              word={word}
-              article={article}
-              wordType={wordType}
-              ipa={ipa}
-              category={category}
-              rating={rating}
-              translation={translation}
-              style={{ x, y, zIndex: index }}
-              onDirectionLock={(axis) => onDirectionLock(axis)}
-              onDragEnd={(e, info) => onDragEnd(info)}
-              animate={dragStart.animation}
-            />
-          );
-        } else
-          return (
-            <Card
-              active={active}
-              key={word}
-              word={word}
-              article={article}
-              wordType={wordType}
-              ipa={ipa}
-              category={category}
-              rating={rating}
-              translation={translation}
-              style={{
-                scale,
-                boxShadow,
-                zIndex: index,
-              }}
-            />
-          );
-      }
+  const handleReset = () => {
+    setVocabularies((vocabularies) =>
+      vocabularies
+        .map((card) => ({
+          ...card,
+          interval: 0,
+          repetition: 0,
+          active: true,
+        }))
+        .sort((a, b) => b.efactor - a.efactor)
     );
   };
-  if (vocabularies.length === 0) {
-    return <EndCard />;
+
+  useEffect(() => {
+    //console.table(vocabularies);
+  }, [vocabularies]);
+
+  const filteredVocabularies = vocabularies.filter(({ active }) => active);
+
+  if (filteredVocabularies.length === 0) {
+    return <EndCard onReset={handleReset} />;
   }
-  return renderCards(vocabularies);
+  return filteredVocabularies.map(
+    ({ note, word, category, translation, active }, index) => {
+      if (index === filteredVocabularies.length - 1) {
+        return (
+          <Card
+            active={active}
+            key={word}
+            word={word}
+            note={note}
+            category={category}
+            translation={translation}
+            style={{ x, y, zIndex: index }}
+            onDirectionLock={(axis) => onDirectionLock(axis)}
+            onDragEnd={(e, info) => onDragEnd(info)}
+            animate={dragStart.animation}
+          />
+        );
+      } else
+        return (
+          <Card
+            active={active}
+            key={word}
+            word={word}
+            note={note}
+            category={category}
+            translation={translation}
+            style={{
+              scale,
+              boxShadow,
+              zIndex: index,
+            }}
+          />
+        );
+    }
+  );
 };
 export default CardStack;
