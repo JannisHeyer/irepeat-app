@@ -1,9 +1,9 @@
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import CardStack from "../components/CardStack";
-import { getCards } from "../utils/getCards";
 
-export default function Home({ vocabularies, setVocabularies, cards }) {
+
+export default function Home({ vocabularies, setVocabularies }) {
   return (
     <>
       <Header pageTitle="iRepeat" isMainTitle />
@@ -21,7 +21,7 @@ export default function Home({ vocabularies, setVocabularies, cards }) {
   provide Server side props:
 -------------------------- */
 
-export async function getStaticProps() {
+/*export async function getStaticProps() {
   const res = await getCards();
   const cards = await JSON.parse(JSON.stringify(res));
   if (!cards) {
@@ -35,4 +35,4 @@ export async function getStaticProps() {
   return {
     props: { cards },
   };
-}
+}*/
