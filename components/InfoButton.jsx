@@ -2,17 +2,29 @@ import Popup from "reactjs-popup";
 import styled from "styled-components";
 import { useState } from "react";
 import Image from "next/image";
+import "animate.css";
 
 export const InfoButton = () => {
+  const [fadeInActive, setFadeInActive] = useState("");
+  const handleFadeOut = () => {
+    setFadeInActive("animate__animated animate__fadeOut");
+    setTimeout(() => {
+      closeModal();
+    }, 1000);
+  };
+
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
+
   return (
     <>
       <StyledWrapper>
-        <StyledIcon>
+        <StyledIcon className="animate__animated animate__rubberBand animate__delay-5s">
           <Image
-            onClick={openModal}
+            onClick={() => {
+              openModal(), setFadeInActive("animate__animated animate__fadeIn");
+            }}
             src="/icons/infoIcon.svg"
             alt="Icon that provides infos on click"
             width={30}
@@ -20,7 +32,7 @@ export const InfoButton = () => {
           />
         </StyledIcon>
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-          <StyledPopup>
+          <StyledPopup className={fadeInActive}>
             <h3>First you repeat then you succeed</h3>
             <p>
               Swipe right if you got the card right but want to keep practicing
@@ -29,7 +41,15 @@ export const InfoButton = () => {
               your stack. Get a card right multiple times in a row and it will
               be removed from the stack automatically.
             </p>
-            <button onClick={closeModal}>Got it!</button>
+            <button onClick={handleFadeOut}>Got it!</button>
+            <SwipeRight className="animate__animated animate__shakeX animate__infinite">
+              <Image
+                src="/icons/swipe-arrow.svg"
+                alt="Icon that provides infos on click"
+                width={60}
+                height={60}
+              />
+            </SwipeRight>
           </StyledPopup>
         </Popup>
       </StyledWrapper>
@@ -39,6 +59,7 @@ export const InfoButton = () => {
 export default InfoButton;
 
 const StyledPopup = styled.div`
+  padding: 1rem;
   top: 10vw;
   position: relative;
   text-align: center;
@@ -63,4 +84,10 @@ const StyledIcon = styled.div`
 const StyledWrapper = styled.div`
   position: fixed;
   z-index: 2;
+`;
+const SwipeRight = styled.div`
+  position: absolute;
+  bottom: -30%;
+  left: 40%;
+  animation-duration: 5s;
 `;

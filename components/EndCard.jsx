@@ -4,7 +4,9 @@ import styled from "styled-components";
 export const EndCard = ({ onReset }) => {
   return (
     <StyledCardContainer>
-      <h3>Congratulations 🎉</h3>
+      <h3 className="animate__animated animate__rubberBand">
+        Congratulations 🎉
+      </h3>
       <p>Awsome! You have completed your current stack of cards.</p>
       <StyledWrapper>
         <button>

@@ -21,7 +21,6 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
 
   const onCreate = (newCard) => {
     if (vocabularies.find((card) => card.word === newCard.word)) {
-      openModal();
       alert.show("Card is already in your stack", { type: "error" });
       reset();
     } else {
@@ -158,6 +157,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
               })}
               id="note"
             />
+
             <p>Create your own card which will be displayed in your stack</p>
             <ButtonWrapper>
               <StyledButton
@@ -202,11 +202,12 @@ const StyledCardContainer = styled.form`
   padding: 2rem;
   align-self: center;
   width: var(--card-width);
-  height: var(--card-height);
+  height: fit-content;
   margin: var(--card-margin);
   text-align: center;
   background-color: var(--card-bgColor);
   border: var(--card-border);
+  box-shadow: rgb(0 0 0 / 20%) 0px 25px 15px -10px;
   .error {
     text-align: center;
     color: #f04419;

@@ -40,7 +40,7 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
 
       const grade = didDragLeft ? 1 : 5;
 
-      console.log({ didDragLeft, grade });
+      //console.log({ didDragLeft, grade });
 
       setVocabularies((vocabularies) =>
         getNewCardsAfterPracticingBottomCard(vocabularies, grade)
@@ -72,7 +72,7 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
   };
 
   useEffect(() => {
-    console.table(vocabularies);
+    //console.table(vocabularies);
   }, [vocabularies]);
 
   const filteredVocabularies = vocabularies.filter(({ active }) => active);
