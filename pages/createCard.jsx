@@ -17,7 +17,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
   } = useForm();
   useFormPersist("form", { watch, setValue });
   const [newCard, setNewCard] = useState();
-  const alert = useAlert();
+
 
   const onCreate = (newCard) => {
     if (vocabularies.find((card) => card.word === newCard.word)) {
