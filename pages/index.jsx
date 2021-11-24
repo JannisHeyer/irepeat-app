@@ -20,7 +20,7 @@ export default function Home({ vocabularies, setVocabularies }) {
   provide Server side props:
 -------------------------- */
 
-export async function getStaticProps() {
+/*export async function getStaticProps() {
   const res = await getCards();
   const cards = await JSON.parse(JSON.stringify(res));
   if (!cards) {
@@ -34,4 +34,4 @@ export async function getStaticProps() {
   return {
     props: { cards },
   };
-}
+}*/
