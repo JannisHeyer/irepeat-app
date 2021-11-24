@@ -66,7 +66,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
                   maxLength: 15,
                   minLength: 1,
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[a-zA-ZäüöÄÜÖ]+[a-zA-ZäüöÄÜÖ ]*$/i,
                     message: "Invalid Input.",
                   },
                 },
@@ -101,7 +101,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
                   maxLength: 15,
                   minLength: 1,
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[a-zA-ZäüöÄÜÖ]+[a-zA-ZäüöÄÜÖ ]*$/i,
                     message: "Invalid Input.",
                   },
                 },
@@ -135,7 +135,7 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
                   maxLength: 15,
                   minLength: 1,
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[a-zA-ZäüöÄÜÖ]+[a-zA-ZäüöÄÜÖ ]*$/i,
                     message: "Invalid Input.",
                   },
                 },
@@ -150,10 +150,11 @@ const CreateCard = ({ vocabularies, setVocabularies }) => {
               </div>
             )}
             <input
+              autoComplete="off"
               placeholder="Optional note..."
               {...register("note", {
                 required: false,
-                maxLength: 15,
+                maxLength: 30,
               })}
               id="note"
             />

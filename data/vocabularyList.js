@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 export const vocabularyList = [
   {
     word: "Die Currywurst",
@@ -105,7 +103,7 @@ export const vocabularyList = [
 
   {
     word: "Ausgefuchst",
-    note: "Lorem ipsum dolor sit amet.",
+    note: "If you do something in a smart way.",
     note2: "Lorem ipsum dolor sit amet.",
     category: "Adjective",
     translation: "Clever",
@@ -226,7 +224,7 @@ export const vocabularyList = [
   },
   {
     word: "Die Behörde",
-    note: "Lorem ipsum dolor sit amet.",
+    note: "Usually a sad place.",
     note2: "Lorem ipsum dolor sit amet.",
     category: "Papers please",
     translation: "Authority / Agency",
@@ -263,6 +261,17 @@ export const vocabularyList = [
     note2: "Lorem ipsum dolor sit amet.",
     category: "Random",
     translation: "Rainbow",
+    active: true,
+    interval: 0,
+    repetition: 0,
+    efactor: 2.5,
+  },
+  {
+    word: "Die Gänsehaut",
+    note: "Lorem ipsum dolor sit amet.",
+    note2: "Lorem ipsum dolor sit amet.",
+    category: "Random",
+    translation: "Goosebumbs",
     active: true,
     interval: 0,
     repetition: 0,
