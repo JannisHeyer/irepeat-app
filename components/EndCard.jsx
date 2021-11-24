@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import "animate.css";
 
 export const EndCard = ({ onReset }) => {
   return (
