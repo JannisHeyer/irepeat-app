@@ -268,7 +268,7 @@ export const vocabularyList = [
   },
   {
     word: "Die Gänsehaut",
-    note: "Lorem ipsum dolor sit amet.",
+    note: "Don't be silly, it's not an actual goose's skin. It's yours when you're scared.",
     note2: "Lorem ipsum dolor sit amet.",
     category: "Random",
     translation: "Goosebumbs",
