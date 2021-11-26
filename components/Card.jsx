@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+const variants = {
+  front: { rotateY: 0 },
+  back: { rotateY: 180 },
+};
+
 export const Card = ({
   word,
   category,
@@ -11,12 +16,8 @@ export const Card = ({
   animate,
   onDragEnd,
   note,
+  note2,
 }) => {
-  const variants = {
-    front: { rotateY: 0 },
-    back: { rotateY: 180 },
-  };
-
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -58,7 +59,10 @@ export const Card = ({
           ) : (
             <StyledCardContainer className="cardBack">
               <h1>{translation}</h1>
-
+              <p>
+                <span>Your note: </span>
+                {note2}
+              </p>
               <StyledButton
                 className="backButton"
                 onClick={() => setIsFlipped((isFlipped) => !isFlipped)}

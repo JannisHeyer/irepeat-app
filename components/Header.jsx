@@ -3,12 +3,10 @@ import InfoButton from "./InfoButton";
 
 export const Header = ({ pageTitle, isMainTitle }) => {
   return (
-    <>
-      <StyledHeader isMainTitle={isMainTitle}>
-        <InfoButton />
-        {pageTitle}
-      </StyledHeader>
-    </>
+    <StyledHeader isMainTitle={isMainTitle}>
+      <InfoButton />
+      {pageTitle}
+    </StyledHeader>
   );
 };
 

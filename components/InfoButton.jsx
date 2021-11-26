@@ -1,11 +1,16 @@
 import Popup from "reactjs-popup";
 import styled from "styled-components";
 import { useState } from "react";
-import Image from "next/image";
 import "animate.css";
+import InfoIcon from "./images/infoIcon.svg";
+import SwipeIcon from "./images/swipe-arrow.svg";
 
 export const InfoButton = () => {
   const [fadeInActive, setFadeInActive] = useState("");
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+  const openModal = () => setOpen(true);
+
   const handleFadeOut = () => {
     setFadeInActive("animate__animated animate__fadeOut");
     setTimeout(() => {
@@ -13,15 +18,11 @@ export const InfoButton = () => {
     }, 1000);
   };
 
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
-
   return (
     <>
       <StyledWrapper>
         <StyledIcon className="animate__animated animate__rubberBand animate__delay-5s">
-          <Image
+          <InfoIcon
             onClick={() => {
               openModal(), setFadeInActive("animate__animated animate__fadeIn");
             }}
@@ -43,7 +44,7 @@ export const InfoButton = () => {
             </p>
             <button onClick={handleFadeOut}>Got it!</button>
             <SwipeRight className="animate__animated animate__shakeX animate__infinite">
-              <Image
+              <SwipeIcon
                 src="/icons/swipe-arrow.svg"
                 alt="Icon that provides infos on click"
                 width={60}

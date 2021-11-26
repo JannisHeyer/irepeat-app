@@ -1,4 +1,4 @@
-import { supermemo } from 'supermemo';
+import { supermemo } from "supermemo";
 
 function practice(card, grade) {
   const { interval, repetition, efactor } = supermemo(card, grade);

@@ -1,32 +1,53 @@
+import React, { useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import ConfettiGenerator from "confetti-js";
+import "animate.css";
 
 export const EndCard = ({ onReset }) => {
-  return (
-    <StyledCardContainer>
-      <h3 className="animate__animated animate__rubberBand">
-        Congratulations 🎉
-      </h3>
-      <p>Awsome! You have completed your current stack of cards.</p>
-      <StyledWrapper>
-        <button>
-          <Link href="/createCard">
-            <p>Add cards</p>
-          </Link>
-        </button>
+  useEffect(() => {
+    const confettiSettings = { target: "my-canvas" };
+    const confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
 
-        <button
-          onClick={() => {
-            onReset();
-          }}
-        >
-          Continue learning
-        </button>
-      </StyledWrapper>
-    </StyledCardContainer>
+    return () => confetti.clear();
+  }, []);
+  return (
+    <>
+      <StyledCanvas id="my-canvas" />
+      <StyledCardContainer>
+        <h3 className="animate__animated animate__rubberBand">
+          Congratulations 🎉
+        </h3>
+        <p>Awsome! You have completed your current stack of cards.</p>
+        <StyledWrapper>
+          <button>
+            <Link href="/createCard">
+              <p>Add cards</p>
+            </Link>
+          </button>
+
+          <button
+            onClick={() => {
+              onReset();
+            }}
+          >
+            Continue learning
+          </button>
+        </StyledWrapper>
+      </StyledCardContainer>
+    </>
   );
 };
 export default EndCard;
+const StyledCanvas = styled.canvas`
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+`;
 
 const StyledCardContainer = styled.div`
   width: var(--card-width);

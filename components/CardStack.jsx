@@ -40,8 +40,6 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
 
       const grade = didDragLeft ? 1 : 5;
 
-      //console.log({ didDragLeft, grade });
-
       setVocabularies((vocabularies) =>
         getNewCardsAfterPracticingBottomCard(vocabularies, grade)
       );
@@ -71,20 +69,17 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
     );
   };
 
-  useEffect(() => {
-    //console.table(vocabularies);
-  }, [vocabularies]);
-
   const filteredVocabularies = vocabularies.filter(({ active }) => active);
 
   if (filteredVocabularies.length === 0) {
     return <EndCard onReset={handleReset} />;
   }
   return filteredVocabularies.map(
-    ({ note, word, category, translation, active }, index) => {
+    ({ note, word, category, translation, active, note2 }, index) => {
       if (index === filteredVocabularies.length - 1) {
         return (
           <Card
+            note2={note2}
             active={active}
             key={word}
             word={word}
@@ -100,6 +95,7 @@ export const CardStack = ({ vocabularies, setVocabularies }) => {
       } else
         return (
           <Card
+            note2={note2}
             active={active}
             key={word}
             word={word}
