@@ -2,6 +2,7 @@ import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
 import CardStack from "../components/CardStack";
 
+
 export default function Home({ vocabularies, setVocabularies }) {
   return (
     <>
