@@ -1,4 +1,4 @@
-## iRepeat
+## iRepeat - First you repeat then you succeed
 
 iRepeat utilises [spaced-repetition](https://en.wikipedia.org/wiki/Spaced_repetition) to
 support people learning a foreign language.
